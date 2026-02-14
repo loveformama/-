@@ -1,4 +1,129 @@
-const textElement = document.getElementById('wish-text');
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для моей любимой мамы</title>
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --dark-berry: #590d22;
+            --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-gradient);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 25px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(255, 77, 109, 0.2);
+            width: 85%;
+            max-width: 380px;
+            position: relative;
+            z-index: 10;
+            border: 3px solid white;
+            transition: all 0.5s ease;
+        }
+
+        .heart-icon {
+            font-size: 60px;
+            display: block;
+            margin-bottom: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: var(--primary-pink);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        #wish-text {
+            color: var(--dark-berry);
+            min-height: 80px;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .btn {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            pointer-events: none;
+            animation: fly linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fly {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <span class="heart-icon">💝</span>
+        <h1>Мамочка, с праздником!</h1>
+        <div id="wish-text">Нажми на кнопку ниже, чтобы увидеть моё пожелание...</div>
+        <button class="btn" onclick="nextWish()">Ещё пожелание! ✨</button>
+    </div>
+
+    <script>
+        const wishes = [
+            "Самой доброй и красивой женщине в этом мире! ❤️",
+            "Пусть твои глаза сияют только от радости, а не от лука! 🌷",
+            "Желаю, чтобы твоё терпение (особенно со мной) никогда не заканчивалось! 🙏",
+            "Пусть каждый день будет как 14 февраля: в любви, заботе и с цветами! 💐",
+            "Мам, ты — мой главный пример того, как нужно любить жизнь! 🌟",
+            "Здоровья тебе стального, а настроения — всегда весеннего! ☀️",
+            "Хочу, чтобы ты улыбалась каждый раз, когда берешь телефон в руки! 😊",
+            "Помни, что ты — самая крутая мама во всей Вселенной! 🚀",
+            "Меньше стресса, больше отдыха и море шоколада сегодня! 🍫"
+        ];
+
+        let currentWish = 0;
+
+        function nextWish() {
+                    const textElement = document.getElementById('wish-text');
             
             // Анимация текста
             textElement.style.opacity = 0;
