@@ -1,0 +1,40 @@
+const textElement = document.getElementById('wish-text');
+            
+            // Анимация текста
+            textElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                textElement.innerText = wishes[currentWish];
+                textElement.style.opacity = 1;
+                currentWish = (currentWish + 1) % wishes.length;
+            }, 300);
+
+            // Взрыв сердечек
+            for(let i=0; i < 15; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            
+            const types = ['❤️', '💖', '💗', '💓', '✨'];
+            heart.innerHTML = types[Math.floor(Math.random() * types.length)];
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        // Фоновые сердечки
+        setInterval(createHeart, 600);
+    </script>
+</body>
+</html>
